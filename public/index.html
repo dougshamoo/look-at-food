@@ -26,9 +26,11 @@
           <input type="text" placeholder="Probably bacon" ng-model="searchItem"/>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <hr />
         <!-- <p>Search Term: {{ searchItem }}</p> -->
         <!-- <p>Possible Foods: {{ possibleFoods }}</p> -->
-        <div ng-repeat="food in possibleFoods">
+        <!-- <p>Food Report: {{ foodReport }}</p> -->
+        <div ng-repeat="food in possibleFoods" ng-click="getFoodByID(food.ndbno)">
           <h4>{{ food.name }}</h4>
           <p>Group: {{ food.group }}</p>
           <p>Food ID: {{ food.ndbno }}</p>
