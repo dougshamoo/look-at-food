@@ -1,4 +1,18 @@
-var lookAtFood = angular.module('lookAtFood', []);
+var lookAtFood = angular.module('lookAtFood', ['ngRoute']);
+
+lookAtFood.config(function($routeProvider) {
+
+  $routeProvider
+  .when('/', {
+    templateUrl: 'views/main.html',
+    controller: 'foodController'
+  })
+  .when('/food', {
+    templateUrl: 'views/food.html',
+    controller: 'foodController'
+  })
+
+});
 
 var apiKey = '95Asywfj2p8t3kQFsGLGKk12vt6gpqW2Yh99GPye';
 var apiSearch = 'http://api.nal.usda.gov/ndb/search';

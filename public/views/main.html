@@ -1,0 +1,15 @@
+<h1>So, you're hungry...</h1>
+<form name="foodForm" ng-submit="searchFoods()" novalidate>
+<label>What do you want to eat?</label>
+<input type="text" placeholder="Probably bacon" ng-model="searchItem"/>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<hr />
+<!-- <p>Search Term: {{ searchItem }}</p> -->
+<!-- <p>Possible Foods: {{ possibleFoods }}</p> -->
+<!-- <p>Food Report: {{ foodReport }}</p> -->
+<div ng-repeat="food in possibleFoods" ng-click="getFoodByID(food.ndbno)">
+  <h4>{{ food.name }}</h4>
+  <p>Group: {{ food.group }}</p>
+  <p>Food ID: {{ food.ndbno }}</p>
+</div>
