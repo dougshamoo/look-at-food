@@ -1,7 +1,9 @@
 var lookAtFood = angular.module('lookAtFood', []);
 
-lookAtFood.controller('foodController', ['$scope', function($scope) {
+lookAtFood.controller('foodController', ['$scope', '$http' function($scope, $http) {
 
   $scope.searchItem = '';
+
+  
 
 }]);
