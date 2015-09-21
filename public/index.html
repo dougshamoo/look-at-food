@@ -21,17 +21,18 @@
     </header>
     <div class="container">      
         <h1>So, you're hungry...</h1>
-        <div>
+        <form name="foodForm" ng-submit="searchFoods()" novalidate>
           <label>What do you want to eat?</label>
           <input type="text" placeholder="Probably bacon" ng-model="searchItem"/>
           <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        <p>{{ searchItem }}</p>
+        </form>
+        <p>Search Term: {{ searchItem }}</p>
+        <p>Possible Foods: {{ possibleFoods }}</p>
     </div>
 
     <script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular.js"></script>
     <script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="libs/angular/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
