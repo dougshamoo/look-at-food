@@ -169,24 +169,31 @@ lookAtFood.directive('d3Bars', ['d3Service', '$window', function(d3Service, $win
         svg.attr('height', height);
 
         //create rectangles for the bar chart
-        svg.selectAll('rect')
+        svg.selectAll('g')
           .data(data).enter()
+            .append('g')
             .append('rect')
-            .attr('height', barHeight)
-            .attr('width', 140)
-            .attr('x', Math.round(margin/2))
-            .attr('y', function(d,i) {
-              return i * (barHeight + barPadding);
-            })
-            .attr('fill', function(d) { return color(d.score); })
+              .attr('height', barHeight)
+              .attr('width', 140)
+              .attr('x', Math.round(margin/2))
+              .attr('y', function(d,i) {
+                return i * (barHeight + barPadding);
+              })
+              .attr('fill', function(d) { return color(d.score); })
             .transition()
               .duration(1000)
               .attr('width', function(d) {
                 return xScale(d.score);
               });
-        svg.selectAll('rect')
+
+        svg.selectAll('g')
           .append('text')
-            .text(function(d) { return d.name; });
+          .attr('class', 'label')
+          .text(function(d) { return d.name; })
+          .attr('text-anchor', 'right')
+          .attr('fill', 'white')
+          .attr("x", function(d) { return xScale(d.score) - 40; })
+          .attr("y", function(d, i) { return i * (barHeight + barPadding) + 14; });
       };
     }
   };
