@@ -1,3 +1,20 @@
-<h1>Well, howdy!</h1>
+<div class="container">
+  <a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>
+  <h2>{{ foodName }}</h2>
 
-<p>Food ID: {{ foodId }}</p>
+  <!-- <div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="nutrient in food.nutrients">
+        {{ nutrient.name }}: <span class="pull-right">{{ nutrient.value }}{{ nutrient.unit }}</span>
+      </li>
+    </ul>
+  </div> -->
+    
+    <!-- bootstrap badge style -->
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="nutrient in nutrients">
+        <span class="badge">{{ nutrient.value }}{{ nutrient.unit }}</span>
+        {{ nutrient.name }}
+      </li>
+    </ul> 
+</div>

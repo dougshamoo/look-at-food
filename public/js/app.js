@@ -21,7 +21,6 @@ var apiReports = 'http://api.nal.usda.gov/ndb/reports'
 lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $http) {
 
   $scope.searchItem = '';
-  $scope.foodReport = {};
   $scope.possibleFoods = {};
 
   $scope.searchFoods = function() {
@@ -45,26 +44,30 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
       });
   }
 
-  $scope.getFoodById = function(id) {
-    var params = [
-      '?format=json',
-      '&ndbno=', id,
-      '&type=b',
-      '&api_key=', apiKey
-    ].join('');
-
-    console.log('getting a food...');
-    $http.get(apiReports + params)
-      .then(function(res) {
-        $scope.foodReport = res.data
-      }, function(res) {
-        console.log('ERROR:', res)
-      });
-
-  }
-
 }]);
 
-lookAtFood.controller('foodController', ['$scope', '$routeParams', function($scope, $routeParams){
+lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http){
     $scope.foodId = $routeParams.id;
+    $scope.foodName = '';
+    $scope.nutrients = {};
+
+    $scope.getFoodById = function(id) {
+      var params = [
+        '?format=json',
+        '&ndbno=', id,
+        '&type=b',
+        '&api_key=', apiKey
+      ].join('');
+
+      console.log('getting a food...');
+      $http.get(apiReports + params)
+        .then(function(res) {
+          $scope.foodName = res.data.report.food.name;
+          $scope.nutrients = res.data.report.food.nutrients;
+        }, function(res) {
+          console.log('ERROR:', res)
+        });
+    }
+
+    $scope.getFoodById($routeParams.id);
 }])

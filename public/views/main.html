@@ -11,7 +11,7 @@
 <!-- <p>Search Term: {{ searchItem }}</p> -->
 <!-- <p>Possible Foods: {{ possibleFoods }}</p> -->
 <!-- <p>Food Report: {{ foodReport }}</p> -->
-<div ng-repeat="food in possibleFoods" ng-click="getFoodById(food.ndbno)">
+<div ng-repeat="food in possibleFoods">
   <h4><a href="#{{ food.ndbno }}">{{ food.name }}</a></h4>
   <p>Group: {{ food.group }}</p>
   <p>Food Id: {{ food.ndbno }}</p>
