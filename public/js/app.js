@@ -45,13 +45,15 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
       });
   }
 
-  $scope.getFoodByID = function(id) {
+  $scope.getFoodById = function(id) {
     var params = [
       '?format=json',
       '&ndbno=', id,
       '&type=b',
       '&api_key=', apiKey
     ].join('');
+
+    console.log('getting a food...');
     $http.get(apiReports + params)
       .then(function(res) {
         $scope.foodReport = res.data
