@@ -5,9 +5,9 @@ lookAtFood.config(function($routeProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'views/main.html',
-    controller: 'foodController'
+    controller: 'mainController'
   })
-  .when('/food', {
+  .when('/:id', {
     templateUrl: 'views/food.html',
     controller: 'foodController'
   })
@@ -18,7 +18,7 @@ var apiKey = '95Asywfj2p8t3kQFsGLGKk12vt6gpqW2Yh99GPye';
 var apiSearch = 'http://api.nal.usda.gov/ndb/search';
 var apiReports = 'http://api.nal.usda.gov/ndb/reports'
 
-lookAtFood.controller('foodController', ['$scope', '$http', function($scope, $http) {
+lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $http) {
 
   $scope.searchItem = '';
   $scope.foodReport = {};
@@ -59,6 +59,10 @@ lookAtFood.controller('foodController', ['$scope', '$http', function($scope, $ht
         console.log('ERROR:', res)
       });
 
-  } 
+  }
 
 }]);
+
+lookAtFood.controller('foodController', ['$scope', '$routeParams', function($scope, $routeParams){
+    $scope.foodId = $routeParams.id;
+}])
