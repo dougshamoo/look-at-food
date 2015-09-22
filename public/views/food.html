@@ -1,6 +1,7 @@
 <div class="container">
-  <a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>
-  <h2>{{ foodName }}</h2>
+  <!-- <a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a> -->
+  <img class="center-block" src="{{imageUrl}}">
+  <h2>{{ foodName }} <small>({{ serving.qty }} {{ serving.label }})</small></h2>
 
   <!-- <div>
     <ul class="list-group">
@@ -13,8 +14,8 @@
     <!-- bootstrap badge style -->
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="nutrient in nutrients">
-        <span class="badge">{{ nutrient.value }}{{ nutrient.unit }}</span>
         {{ nutrient.name }}
+        <span class="badge">{{ nutrient.value }} {{ nutrient.unit }}</span>
       </li>
     </ul> 
 </div>

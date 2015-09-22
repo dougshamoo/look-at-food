@@ -4,6 +4,11 @@ var apiKey = '95Asywfj2p8t3kQFsGLGKk12vt6gpqW2Yh99GPye';
 var apiSearch = 'http://api.nal.usda.gov/ndb/search';
 var apiReports = 'http://api.nal.usda.gov/ndb/reports'
 
+var apiImage = 'https://www.googleapis.com/customsearch/v1';
+var imageKey = 'AIzaSyAH1SDzLxXtRnyVSMzOXXkKEnQ4UKWHojA';
+var searchEngineId = '006340961995010200249:7zpz0ppny5g';
+//https://www.googleapis.com/customsearch/v1?key=AIzaSyAH1SDzLxXtRnyVSMzOXXkKEnQ4UKWHojA&cx=006340961995010200249:7zpz0ppny5g&q=bacon&searchType=image
+
 // Routes to change templates/controllers
 lookAtFood.config(function($routeProvider) {
 
@@ -50,7 +55,9 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
 lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http){
     $scope.foodId = $routeParams.id;
     $scope.foodName = '';
-    $scope.nutrients = {};
+    $scope.nutrients = [];
+    $scope.serving = {};  // .qty + .label for serving size
+    $scope.imageUrl = '';
 
     $scope.getFoodById = function(id) {
       var params = [
@@ -65,10 +72,30 @@ lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', func
         .then(function(res) {
           $scope.foodName = res.data.report.food.name;
           $scope.nutrients = res.data.report.food.nutrients;
+          $scope.serving = res.data.report.food.nutrients[0].measures[0];
+          $scope.getImage($scope.foodName);
         }, function(res) {
-          console.log('ERROR:', res)
+          console.log('ERROR:', res);
+        });
+    }
+
+    $scope.getImage = function(foodName) {
+      var params = [
+        '?key=', imageKey,
+        '&cx=', searchEngineId,
+        '&searchType=image',
+        '&q=', foodName
+      ].join('');
+
+      $http.get(apiImage + params)
+        .then(function(res) {
+          console.log(res);
+          $scope.imageUrl = res.data.items[0].link;
+        }, function(res) {
+          console.log('ERROR:', res);
         });
     }
 
     $scope.getFoodById($routeParams.id);
+    
 }])
