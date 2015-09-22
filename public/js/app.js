@@ -1,5 +1,10 @@
 var lookAtFood = angular.module('lookAtFood', ['ngRoute']);
 
+var apiKey = '95Asywfj2p8t3kQFsGLGKk12vt6gpqW2Yh99GPye';
+var apiSearch = 'http://api.nal.usda.gov/ndb/search';
+var apiReports = 'http://api.nal.usda.gov/ndb/reports'
+
+// Routes to change templates/controllers
 lookAtFood.config(function($routeProvider) {
 
   $routeProvider
@@ -14,10 +19,7 @@ lookAtFood.config(function($routeProvider) {
 
 });
 
-var apiKey = '95Asywfj2p8t3kQFsGLGKk12vt6gpqW2Yh99GPye';
-var apiSearch = 'http://api.nal.usda.gov/ndb/search';
-var apiReports = 'http://api.nal.usda.gov/ndb/reports'
-
+// Controller for the main search page
 lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $http) {
 
   $scope.searchItem = '';
@@ -37,8 +39,6 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
     $http.get(apiSearch + params)
       .then(function(res) {
         $scope.possibleFoods = res.data.list.item;
-        // console.log($scope.possibleFoods);
-        // console.log(typeof $scope.possibleFoods);
       }, function(res) {
         console.log('error', res);
       });
@@ -46,6 +46,7 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
 
 }]);
 
+// Controller for the individual food nutrient pages
 lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http){
     $scope.foodId = $routeParams.id;
     $scope.foodName = '';
