@@ -1,6 +1,10 @@
-.chart-text {
+.chart-name {
+  fill: black;
+  font: 18px sans-serif;
+  text-anchor: start;
+}
+.chart-label {
   fill: white;
-  font: 10px sans-serif;
+  font: 18px sans-serif;
   text-anchor: end;
-  z-index: 1;
 }
