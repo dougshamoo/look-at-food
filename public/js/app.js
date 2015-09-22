@@ -73,7 +73,7 @@ lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', func
           $scope.foodName = res.data.report.food.name;
           $scope.nutrients = res.data.report.food.nutrients;
           $scope.serving = res.data.report.food.nutrients[0].measures[0];
-          $scope.getImage($scope.foodName);
+          // $scope.getImage($scope.foodName);
         }, function(res) {
           console.log('ERROR:', res);
         });
@@ -84,6 +84,7 @@ lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', func
         '?key=', imageKey,
         '&cx=', searchEngineId,
         '&searchType=image',
+        '&imgSize=medium',
         '&q=', foodName
       ].join('');
 
