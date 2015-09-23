@@ -1,14 +1,14 @@
 <!-- d3 bar chart hopefully -->
 <div>
-  <d3-bars bar-height="20" bar-padding="5" data="data"></d3-bars>
+  <d3-bars bar-height="40" bar-padding="5" data="chartData"></d3-bars>
 </div>
 
 <h1>So, you're hungry...</h1>
 
 
-<form name="foodForm" ng-submit="searchFoods()" novalidate>
+<form name="foodForm" class="form-group" ng-submit="searchFoods()" novalidate>
   <label>What do you want to eat?</label>
-  <input type="text" placeholder="Probably bacon" ng-model="searchItem"/>
+  <input type="text" class="form-control form-control-inline" placeholder="Probably bacon" ng-model="searchItem"/>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
@@ -17,6 +17,7 @@
 <!-- <p>Search Term: {{ searchItem }}</p> -->
 <!-- <p>Possible Foods: {{ possibleFoods }}</p> -->
 <!-- <p>Food Report: {{ foodReport }}</p> -->
+<h2 ng-if="hasNoResults">No results! Try again...</h2>
 <div ng-repeat="food in possibleFoods">
   <h4><a href="#{{ food.ndbno }}">{{ food.name }}</a></h4>
   <p>Group: {{ food.group }}</p>

@@ -29,11 +29,12 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
 
   $scope.searchItem = '';
   $scope.possibleFoods = {};
+  $scope.hasNoResults = false;
   $scope.chartData = [
-        {name: "Doug", value: 94, label: 'Super Awesome'},
-        {name: "Jenny", value: 83, label: 'Awesome'},
-        {name: "Scott", value: 76, label: 'Pretty Awesome'},
-        {name: "Groucho", value: 33, label: 'Somewhat Awesome'}
+        {name: ":D", value: 100, label: 'Super Awesome'},
+        {name: ":)", value: 80, label: 'Awesome'},
+        {name: ":|", value: 60, label: 'Pretty Awesome'},
+        {name: ":(", value: 40, label: 'Somewhat Awesome'}
   ];
 
   $scope.searchFoods = function() {
@@ -49,9 +50,11 @@ lookAtFood.controller('mainController', ['$scope', '$http', function($scope, $ht
     console.log('searching for foods...');
     $http.get(apiSearch + params)
       .then(function(res) {
+        $scope.hasNoResults = false;
         $scope.possibleFoods = res.data.list.item;
       }, function(res) {
-        console.log('error', res);
+        // console.log('error', res);
+        $scope.hasNoResults = true;
       });
   };
 
@@ -63,9 +66,9 @@ lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', '$fi
     $scope.foodName = '';
     $scope.nutrients = [];
     $scope.serving = {};  // .qty + .label for serving size
-    $scope.energy = [];
     $scope.imageUrl = '';
-    $scope.chartData = {};
+    $scope.chartData = [];
+    $scope.energy = [];
 
     $scope.getFoodById = function(id) {
       var params = [
@@ -81,8 +84,8 @@ lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', '$fi
           $scope.foodName = res.data.report.food.name;
           $scope.nutrients = res.data.report.food.nutrients;
           $scope.serving = res.data.report.food.nutrients[0].measures[0];
+          $scope.getImage($scope.foodName);
           $scope.makeChartData();
-          // $scope.getImage($scope.foodName);
         }, function(res) {
           console.log('ERROR:', res);
         });
@@ -107,18 +110,17 @@ lookAtFood.controller('foodController', ['$scope', '$routeParams', '$http', '$fi
     };
 
     $scope.makeChartData = function() {
-      var macros = $filter('filter')($scope.nutrients, {group: 'Proximates', name: '!Water', name:'!Energy'});
-      var data = [];
+      var macros = $filter('filter')($scope.nutrients, {group: 'Proximates', name: '!Water'});
+      macros = $filter('filter')(macros, {name: '!Energy'});
       for (var i = 0; i < macros.length; i++) {
-        data.push({
+        $scope.chartData.push({
           name: macros[i].name,
-          value: macros[i].value,
+          value: +macros[i].value,
           label: macros[i].value + ' ' + macros[i].unit
         });
       }
-      $scope.chartData = data;
 
-      // set $scope.energy
+      // set $scope.energy -- would need to fix isolate scope with d3 to make another graph
       var energy = $filter('filter')($scope.nutrients, {group: 'Proximates', name:'Energy'});
       $scope.energy.push({
         name: energy[0].name,
@@ -136,9 +138,9 @@ lookAtFood.directive('d3Bars', ['d3Service', '$window', function(d3Service, $win
     restrict: 'EA',
     // add isolate scope for more than one dataset to chart,
     // otherwise gets full access to controller's scope
-    // scope: {
-    //   chartData: '='
-    // },
+    scope: {
+      data: '='
+    },
     link: function(scope, element, attrs) {
       var margin = parseInt(attrs.margin) || 20,
           barHeight = parseInt(attrs.barHeight) || 20,
@@ -153,19 +155,11 @@ lookAtFood.directive('d3Bars', ['d3Service', '$window', function(d3Service, $win
         scope.$apply();
       };
 
-      // hard-code chartData because tests
-      // scope.chartData = [
-      //   {name: "Doug", score: 94},
-      //   {name: "Jenny", score: 83},
-      //   {name: "Scott", score: 76},
-      //   {name: "Groucho", score: 33}
-      // ];
-
       // Watch for resize event
       scope.$watch(function() {
         return angular.element($window)[0].innerWidth;
       }, function() {
-        scope.render(scope.chartData);
+        scope.render(scope.data);
       });
 
       scope.render = function(data) {
@@ -212,17 +206,27 @@ lookAtFood.directive('d3Bars', ['d3Service', '$window', function(d3Service, $win
 
         svg.selectAll('g')
           .append('text')
-          .text(function(d) { return d.name; })
-          .attr('class', 'chart-name')
-          .attr("x", 20)
-          .attr("y", function(d, i) { return i * (barHeight + barPadding) + 16; });
-
-        svg.selectAll('g')
-          .append('text')
           .text(function(d) { return d.label; })
           .attr('class', 'chart-label')
           .attr("x", function(d) { return xScale(d.value); })
-          .attr("y", function(d, i) { return i * (barHeight + barPadding) + 16; });
+          .attr("y", function(d, i) { return i * (barHeight + barPadding) + 25; });
+
+        svg.selectAll('g')
+          .append('text')
+          .text(function(d) { return d.name; })
+          .attr('class', 'chart-name')
+          .attr("x", 20)
+          .attr("y", function(d, i) { return i * (barHeight + barPadding) + 25; });
+      
+        // watch for data changes and re-render
+        scope.$watch(
+          function() { return scope.data.length; },
+          function(newVal, oldVal) {
+            if (newVal !== oldVal) {
+              scope.render(scope.data);
+            }
+        });
+
       };
     }
   };

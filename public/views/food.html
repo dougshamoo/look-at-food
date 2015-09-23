@@ -1,9 +1,16 @@
 <div class="container">
-  <img class="center-block" src="http://thecatapi.com/api/images/get?format=src&type=gif">
-  <!-- <img class="center-block" src="{{imageUrl}}"> -->
-  Chart Data: {{ chartData }}
-  Energy: {{ energy }}
+ <!--  <img class="center-block" src="http://thecatapi.com/api/images/get?format=src&type=gif"> -->
+  <img class="center-block" src="{{imageUrl}}">
+  <!-- Chart Data: {{ chartData }}
+  Energy: {{ energy }} -->
   <h2>{{ foodName }}  <small>{{ serving.qty }} {{ serving.label }}</small></h2>
+  <div class='chart'>
+    <d3-bars bar-height="40" bar-padding="5" data="energy"></d3-bars>
+  </div>
+  <br/>
+  <div class='chart'>
+    <d3-bars bar-height="40" bar-padding="5" data="chartData"></d3-bars>
+  </div>
 
   <!-- <div>
     <ul class="list-group">
@@ -14,7 +21,7 @@
   </div> -->
     
     <!-- bootstrap badge style -->
-    <ul class="list-group">
+    <ul class="list-group center-block">
       <li class="list-group-item" ng-repeat="nutrient in nutrients">
         {{ nutrient.name }}
         <span class="badge">{{ nutrient.value }} {{ nutrient.unit }}</span>
