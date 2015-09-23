@@ -18,8 +18,10 @@
 <!-- <p>Possible Foods: {{ possibleFoods }}</p> -->
 <!-- <p>Food Report: {{ foodReport }}</p> -->
 <h2 ng-if="hasNoResults">No results! Try again...</h2>
-<div ng-repeat="food in possibleFoods">
-  <h4><a href="#{{ food.ndbno }}">{{ food.name }}</a></h4>
-  <p>Group: {{ food.group }}</p>
-  <p>Food Id: {{ food.ndbno }}</p>
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="food in possibleFoods">
+    <h4><a href="#{{ food.ndbno }}">{{ food.name }}</a></h4>
+    <p>Group: {{ food.group }}</p>
+    <!-- <p>Food Id: {{ food.ndbno }}</p> -->
+  </li>
 </div>
