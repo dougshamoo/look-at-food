@@ -1,4 +1,4 @@
-# LookAtFood #
+# Look@Food #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -15,42 +15,31 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
- 
-## LookAtFood ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
 
 ## Do you want to look at food? ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  Yes, you do.
+  > Yes, you do.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-  This is a simple web app for looking up nutritional info via the USDA api. Eventually, it might have pretty graphs and breakdowns of macros. For now, it will just give you the info you need to make informed dietary decisions.
+  > This is a simple web app for looking up nutritional info via the USDA api. It generates a nutrition bar chart with macro breakdowns, and may have some additional visualizations down the road. For now, it will just give you the info you need to make slightly more informed dietary decisions.
 
 ## Problem ##
-  > Describe the problem your product solves.
-  I want to lookup the nutritional information for some food I'm about to jam in my mouth. I want the data fast and in an easy to digest format. Also, angular.
+  > I want to lookup the nutritional information for some food I'm about to jam in my mouth. I want the data fast and in an easy to digest format. Also, Angular.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-  LookAtFood makes calls to the USDA api in order to grab nutritional data for a user-specified food. This data is then displayed to the user for perusal. Graphs possibly incoming.
+  > Look@Food makes calls to the USDA api in order to grab nutritional data for a user-specified food. This data is then displayed to the user for perusal. Pretty graphs made possible by d3.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
-  "I eat, therefore I look at food"
+  > "I eat, therefore I look at food"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-  It's super easy.
-  Step 1: Go to website
-  Step 2: Type a food
-  Step 3: ???
-  Step 4: Profit
+  > It's super easy.
+  1. Go to website
+  1. Type a food
+  1. ???
+  1. Profit
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-  "This app does exactly what I need it to do and nothing more... it's fast, easy to use, and free! What more could you ask for?" -- Some guy
+  > "This app does exactly what I need it to do and nothing more... it's fast, easy to use, and free! What more could you ask for?" -- Some guy
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
-  Just do it. Start caring about what you jam in your mouth. Before you eat, LookAtFood.
+  > Just do it. Start caring about what you jam in your mouth. Before you eat, Look@Food.

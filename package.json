@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dougshamoo/2015-08-solo.git"
+    "url": "git+https://github.com/dougshamoo/look-at-food.git"
   },
   "author": "Doug Shamoo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dougshamoo/2015-08-solo/issues"
+    "url": "https://github.com/dougshamoo/look-at-food/issues"
   },
-  "homepage": "https://github.com/dougshamoo/2015-08-solo#readme",
+  "homepage": "https://github.com/dougshamoo/look-at-food#readme",
   "dependencies": {
     "express": "^4.13.3",
     "morgan": "^1.6.1"
