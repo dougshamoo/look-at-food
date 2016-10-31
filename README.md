@@ -48,4 +48,4 @@ This project is deployed on Heroku.
 
 ### Roadmap
 
-View the project roadmap [here](https://github.com/dougshamoo/look-at-food/issues)ddd
+View the project roadmap [here](https://github.com/dougshamoo/look-at-food/issues)
